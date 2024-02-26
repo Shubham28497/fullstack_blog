@@ -1,9 +1,25 @@
+const User = require("../../model/user/User");
+
 //* register
 const regCtrl = async (req, res) => {
+  const { fullName, email, password } = req.body;
   try {
+    //!check if user exists
+    const userFound = await User.findOne({ email });
+    if (userFound) {
+      return res.json({ status: "failed", data: "User already exists" });
+    }
+    //!hashed password
+
+    //!register user
+    const user = await User.create({
+      fullName,
+      email,
+      password,
+    });
     res.json({
       status: "Success",
-      user: "User registered ",
+      data: user,
     });
   } catch (err) {
     res.json(err);
@@ -89,7 +105,7 @@ const updateUserCtrl = async (req, res) => {
 };
 
 //*logout
-const logoutCtrl= async (req, res) => {
+const logoutCtrl = async (req, res) => {
   try {
     res.json({
       status: "Success",
@@ -98,7 +114,7 @@ const logoutCtrl= async (req, res) => {
   } catch (err) {
     res.json(err);
   }
-}
+};
 module.exports = {
   regCtrl,
   logCtrl,

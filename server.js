@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const userRoutes = require("./routes/users/User");
+const postRoutes = require("./routes/posts/Post");
 const app = express();
 
 require("./config/dbConnect");
@@ -11,153 +12,10 @@ require("./config/dbConnect");
 app.use("/api/v1/users", userRoutes);
 
 //*post route
-//!POST/api/v1/users/register
-app.post("/api/v1/users/register", async (req, res) => {});
-//!POST/api/v1/users/login
-app.post("/api/v1/users/login", async (req, res) => {
-  try {
-    res.json({
-      status: "Success",
-      user: "User login ",
-    });
-  } catch (err) {
-    res.json(err);
-  }
-});
-//!GET/api/v1/users/:id
-app.get("/api/v1/users/:id", async (req, res) => {
-  try {
-    res.json({
-      status: "Success",
-      user: "User details ",
-    });
-  } catch (err) {
-    res.json(err);
-  }
-});
-//!GET/api/v1/users/profile/:id
-app.get("/api/v1/users/profile/:id", async (req, res) => {
-  try {
-    res.json({
-      status: "Success",
-      user: "User details ",
-    });
-  } catch (err) {
-    res.json(err);
-  }
-});
-//!PUT/api/v1/users/profile-photo-upload/:id
-app.put("/api/v1/users/profile-photo-upload/:id", async (req, res) => {
-  try {
-    res.json({
-      status: "Success",
-      user: "User profile image upload ",
-    });
-  } catch (err) {
-    res.json(err);
-  }
-});
-//!PUT/api/v1/users/cover-photo-upload/:id
-app.put("/api/v1/users/cover-photo-upload/:id", async (req, res) => {
-  try {
-    res.json({
-      status: "Success",
-      user: "User cover image upload ",
-    });
-  } catch (err) {
-    res.json(err);
-  }
-});
-//!PUT/api/v1/users/update-password/:id
-app.put("/api/v1/users/update-password/:id", async (req, res) => {
-  try {
-    res.json({
-      status: "Success",
-      user: "User update password ",
-    });
-  } catch (err) {
-    res.json(err);
-  }
-});
-//!PUT/api/v1/users/update/:id
-app.put("/api/v1/users/update/:id", async (req, res) => {
-  try {
-    res.json({
-      status: "Success",
-      user: "User update  ",
-    });
-  } catch (err) {
-    res.json(err);
-  }
-});
-//!GET/api/v1/users/logout/:id
-app.get("/api/v1/users/logout", async (req, res) => {
-  try {
-    res.json({
-      status: "Success",
-      user: "User logout ",
-    });
-  } catch (err) {
-    res.json(err);
-  }
-});
+app.use("/api/v1/posts",postRoutes)
 
-//*post route
-//!POST/api/v1/posts
-app.post("/api/v1/posts", async (req, res) => {
-  try {
-    res.json({
-      status: "Success",
-      user: "Post created",
-    });
-  } catch (err) {
-    res.json(err);
-  }
-});
-//!GET/api/v1/posts
-app.get("/api/v1/posts", async (req, res) => {
-  try {
-    res.json({
-      status: "Success",
-      user: "Posts list",
-    });
-  } catch (err) {
-    res.json(err);
-  }
-});
-//!GET/api/v1/posts/:id
-app.get("/api/v1/posts/:id", async (req, res) => {
-  try {
-    res.json({
-      status: "Success",
-      user: "Posts details",
-    });
-  } catch (err) {
-    res.json(err);
-  }
-});
-//!DEl/api/v1/posts/:id
-app.delete("/api/v1/posts/:id", async (req, res) => {
-  try {
-    res.json({
-      status: "Success",
-      user: "Post delete",
-    });
-  } catch (err) {
-    res.json(err);
-  }
-});
-//!PUT/api/v1/posts/:id
-app.put("/api/v1/posts/:id", async (req, res) => {
-  try {
-    res.json({
-      status: "Success",
-      user: "Post updated",
-    });
-  } catch (err) {
-    res.json(err);
-  }
-});
+
+
 
 //*comment route
 //!POST/api/v1/comments

@@ -7,7 +7,7 @@ const app = express();
 
 require("./config/dbConnect");
 //*middleware
-
+app.use(express.json())
 //* user route
 app.use("/api/v1/users", userRoutes);
 

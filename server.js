@@ -92,5 +92,62 @@ app.get("/api/v1/users/logout ", async (req, res) => {
     res.json(err);
   }
 });
+
+//*post route
+//!POST/api/v1/users/posts
+app.post("/api/v1/users/posts ", async (req, res) => {
+  try {
+    res.json({
+      status: "Success",
+      user: "Post created",
+    });
+  } catch (err) {
+    res.json(err);
+  }
+});
+//!GET/api/v1/users/posts
+app.get("/api/v1/users/posts ", async (req, res) => {
+  try {
+    res.json({
+      status: "Success",
+      user: "Posts list",
+    });
+  } catch (err) {
+    res.json(err);
+  }
+});
+//!GET/api/v1/users/posts/:id
+app.get("/api/v1/users/posts/:id ", async (req, res) => {
+  try {
+    res.json({
+      status: "Success",
+      user: "Posts details",
+    });
+  } catch (err) {
+    res.json(err);
+  }
+});
+//!DEl/api/v1/users/posts/:id
+app.delete("/api/v1/users/posts/:id ", async (req, res) => {
+  try {
+    res.json({
+      status: "Success",
+      user: "Post delete",
+    });
+  } catch (err) {
+    res.json(err);
+  }
+});
+//!PUT/api/v1/users/posts/:id
+app.put("/api/v1/users/posts/:id ", async (req, res) => {
+  try {
+    res.json({
+      status: "Success",
+      user: "Post updated",
+    });
+  } catch (err) {
+    res.json(err);
+  }
+});
 const PORT = process.env.PORT || 9000;
 app.listen(PORT, console.log(`Server is running on PORT ${PORT}`));

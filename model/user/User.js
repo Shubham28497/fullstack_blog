@@ -22,7 +22,7 @@ const userSchema = new mongoose.model(
       type: String,
     },
     posts: [{ type: mongoose.Schema.Types.ObjectId, ref: "Post" }],
-    posts: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
+    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
   },
   {
     timestamps: true,

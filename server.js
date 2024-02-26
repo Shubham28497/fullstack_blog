@@ -5,7 +5,7 @@ require("./config/dbConnect");
 
 //* user route
 //!POST/api/v1/users/register
-app.post("/api/v1/users/register ", async (req, res) => {
+app.post("/api/v1/users/register", async (req, res) => {
   try {
     res.json({
       status: "Success",
@@ -16,7 +16,7 @@ app.post("/api/v1/users/register ", async (req, res) => {
   }
 });
 //!POST/api/v1/users/login
-app.post("/api/v1/users/login ", async (req, res) => {
+app.post("/api/v1/users/login", async (req, res) => {
   try {
     res.json({
       status: "Success",
@@ -27,7 +27,7 @@ app.post("/api/v1/users/login ", async (req, res) => {
   }
 });
 //!GET/api/v1/users/:id
-app.get("/api/v1/users/:id ", async (req, res) => {
+app.get("/api/v1/users/:id", async (req, res) => {
   try {
     res.json({
       status: "Success",
@@ -38,7 +38,7 @@ app.get("/api/v1/users/:id ", async (req, res) => {
   }
 });
 //!GET/api/v1/users/profile/:id
-app.get("/api/v1/users/profile/:id ", async (req, res) => {
+app.get("/api/v1/users/profile/:id", async (req, res) => {
   try {
     res.json({
       status: "Success",
@@ -49,7 +49,7 @@ app.get("/api/v1/users/profile/:id ", async (req, res) => {
   }
 });
 //!PUT/api/v1/users/profile-photo-upload/:id
-app.put("/api/v1/users/profile-photo-upload/:id ", async (req, res) => {
+app.put("/api/v1/users/profile-photo-upload/:id", async (req, res) => {
   try {
     res.json({
       status: "Success",
@@ -60,7 +60,7 @@ app.put("/api/v1/users/profile-photo-upload/:id ", async (req, res) => {
   }
 });
 //!PUT/api/v1/users/cover-photo-upload/:id
-app.put("/api/v1/users/cover-photo-upload/:id ", async (req, res) => {
+app.put("/api/v1/users/cover-photo-upload/:id", async (req, res) => {
   try {
     res.json({
       status: "Success",
@@ -71,7 +71,7 @@ app.put("/api/v1/users/cover-photo-upload/:id ", async (req, res) => {
   }
 });
 //!PUT/api/v1/users/update-password/:id
-app.put("/api/v1/users/update-password/:id ", async (req, res) => {
+app.put("/api/v1/users/update-password/:id", async (req, res) => {
   try {
     res.json({
       status: "Success",
@@ -81,8 +81,19 @@ app.put("/api/v1/users/update-password/:id ", async (req, res) => {
     res.json(err);
   }
 });
-//!GET/api/v1/users/profile/:id
-app.get("/api/v1/users/logout ", async (req, res) => {
+//!PUT/api/v1/users/update/:id
+app.put("/api/v1/users/update/:id", async (req, res) => {
+  try {
+    res.json({
+      status: "Success",
+      user: "User update  ",
+    });
+  } catch (err) {
+    res.json(err);
+  }
+});
+//!GET/api/v1/users/logout/:id
+app.get("/api/v1/users/logout", async (req, res) => {
   try {
     res.json({
       status: "Success",
@@ -94,8 +105,8 @@ app.get("/api/v1/users/logout ", async (req, res) => {
 });
 
 //*post route
-//!POST/api/v1/users/posts
-app.post("/api/v1/users/posts ", async (req, res) => {
+//!POST/api/v1/posts
+app.post("/api/v1/posts", async (req, res) => {
   try {
     res.json({
       status: "Success",
@@ -105,8 +116,8 @@ app.post("/api/v1/users/posts ", async (req, res) => {
     res.json(err);
   }
 });
-//!GET/api/v1/users/posts
-app.get("/api/v1/users/posts ", async (req, res) => {
+//!GET/api/v1/posts
+app.get("/api/v1/posts", async (req, res) => {
   try {
     res.json({
       status: "Success",
@@ -116,8 +127,8 @@ app.get("/api/v1/users/posts ", async (req, res) => {
     res.json(err);
   }
 });
-//!GET/api/v1/users/posts/:id
-app.get("/api/v1/users/posts/:id ", async (req, res) => {
+//!GET/api/v1/posts/:id
+app.get("/api/v1/posts/:id", async (req, res) => {
   try {
     res.json({
       status: "Success",
@@ -127,8 +138,8 @@ app.get("/api/v1/users/posts/:id ", async (req, res) => {
     res.json(err);
   }
 });
-//!DEl/api/v1/users/posts/:id
-app.delete("/api/v1/users/posts/:id ", async (req, res) => {
+//!DEl/api/v1/posts/:id
+app.delete("/api/v1/posts/:id", async (req, res) => {
   try {
     res.json({
       status: "Success",
@@ -138,8 +149,8 @@ app.delete("/api/v1/users/posts/:id ", async (req, res) => {
     res.json(err);
   }
 });
-//!PUT/api/v1/users/posts/:id
-app.put("/api/v1/users/posts/:id ", async (req, res) => {
+//!PUT/api/v1/posts/:id
+app.put("/api/v1/posts/:id", async (req, res) => {
   try {
     res.json({
       status: "Success",
@@ -151,8 +162,8 @@ app.put("/api/v1/users/posts/:id ", async (req, res) => {
 });
 
 //*comment route
-//!POST/api/v1/users/comments
-app.post("/api/v1/users/comments ", async (req, res) => {
+//!POST/api/v1/comments
+app.post("/api/v1/comments", async (req, res) => {
   try {
     res.json({
       status: "Success",
@@ -163,8 +174,8 @@ app.post("/api/v1/users/comments ", async (req, res) => {
   }
 });
 
-//!GET/api/v1/users/comments/:id
-app.get("/api/v1/users/comments/:id ", async (req, res) => {
+//!GET/api/v1/comments/:id
+app.get("/api/v1/comments/:id", async (req, res) => {
   try {
     res.json({
       status: "Success",
@@ -174,8 +185,8 @@ app.get("/api/v1/users/comments/:id ", async (req, res) => {
     res.json(err);
   }
 });
-//!DEl/api/v1/users/comments/:id
-app.delete("/api/v1/users/comments/:id ", async (req, res) => {
+//!DEl/api/v1/comments/:id
+app.delete("/api/v1/comments/:id", async (req, res) => {
   try {
     res.json({
       status: "Success",
@@ -185,8 +196,8 @@ app.delete("/api/v1/users/comments/:id ", async (req, res) => {
     res.json(err);
   }
 });
-//!PUT/api/v1/users/comments/:id
-app.put("/api/v1/users/comments/:id ", async (req, res) => {
+//!PUT/api/v1/comments/:id
+app.put("/api/v1/comments/:id", async (req, res) => {
   try {
     res.json({
       status: "Success",

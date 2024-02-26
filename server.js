@@ -1,20 +1,18 @@
-const express = require("express");
-const app = express();
 require("dotenv").config();
+const express = require("express");
+const userRoutes = require("./routes/users/User");
+const app = express();
+
 require("./config/dbConnect");
+//*middleware
+
 
 //* user route
+app.use("/api/v1/users", userRoutes);
+
+//*post route
 //!POST/api/v1/users/register
-app.post("/api/v1/users/register", async (req, res) => {
-  try {
-    res.json({
-      status: "Success",
-      user: "User Registered ",
-    });
-  } catch (err) {
-    res.json(err);
-  }
-});
+app.post("/api/v1/users/register", async (req, res) => {});
 //!POST/api/v1/users/login
 app.post("/api/v1/users/login", async (req, res) => {
   try {

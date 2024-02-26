@@ -6,6 +6,7 @@ const commentSchema = new mongoose.model(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
+      ref: "User",
     },
     message: {
       type: String,

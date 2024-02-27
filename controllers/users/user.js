@@ -5,6 +5,9 @@ const appErr = require("../../utils/appErr");
 //* register
 const regCtrl = async (req, res, next) => {
   const { fullName, email, password } = req.body;
+  if (!fullName || !email || !password) {
+    return next(appErr("All fields are required"));
+  }
   try {
     //!check if user exists
     const userFound = await User.findOne({ email });
@@ -30,31 +33,24 @@ const regCtrl = async (req, res, next) => {
   }
 };
 //*login
-const logCtrl = async (req, res) => {
+const logCtrl = async (req, res, next) => {
   const { email, password } = req.body;
+  if(!email||!password){
+    return next(appErr("All fields are required"))
+  }
 
   try {
     //!check if the email exists
     const userFound = await User.findOne({ email });
     if (!userFound) {
       //! throw an error
-      if (userFound) {
-        res.json({
-          status: "failed",
-          message: "Invalid login credentails",
-        });
-      }
+      return next(appErr("Invalid credentails"));
     }
     //! verify password
     const isPassValid = await bcrypt.compare(password, userFound.password);
     if (!isPassValid) {
       //! throw an error
-      if (userFound) {
-        res.json({
-          status: "failed",
-          message: "Invalid password",
-        });
-      }
+      return next(appErr("Invalid credentails"));
     }
     res.json({
       status: "Success",

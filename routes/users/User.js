@@ -11,7 +11,7 @@ const {
   logoutCtrl,
 } = require("../../controllers/users/user");
 const userRoutes = express.Router();
-
+const protected= require('../../middlewares/protected')
 //* register
 //!POST/register
 userRoutes.post("/register", regCtrl);
@@ -20,7 +20,7 @@ userRoutes.post("/login", logCtrl);
 //!GET/:id
 userRoutes.get("/:id", userDetailsCtrl);
 //!GET/profile/:id
-userRoutes.get("/profile/:id", profileCtrl);
+userRoutes.get("/profile/:id", protected, profileCtrl);
 //!PUT/profile-photo-upload/:id
 userRoutes.put("/profile-photo-upload/:id", profilePhotoUploadCtrl);
 //!PUT/cover-photo-upload/:id

@@ -34,9 +34,10 @@ const regCtrl = async (req, res, next) => {
 };
 //*login
 const logCtrl = async (req, res, next) => {
+  // console.log(req.session)
   const { email, password } = req.body;
-  if(!email||!password){
-    return next(appErr("All fields are required"))
+  if (!email || !password) {
+    return next(appErr("All fields are required"));
   }
 
   try {
@@ -52,6 +53,9 @@ const logCtrl = async (req, res, next) => {
       //! throw an error
       return next(appErr("Invalid credentails"));
     }
+    //! save the user info
+    req.session.userAuth = userFound._id;
+    console.log(req.session)
     res.json({
       status: "Success",
       data: userFound,

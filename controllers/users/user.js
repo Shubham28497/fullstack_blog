@@ -55,7 +55,7 @@ const logCtrl = async (req, res, next) => {
     }
     //! save the user info
     req.session.userAuth = userFound._id;
-    console.log(req.session)
+    console.log(req.session);
     res.json({
       status: "Success",
       data: userFound,
@@ -78,9 +78,13 @@ const userDetailsCtrl = async (req, res) => {
 //*profile
 const profileCtrl = async (req, res) => {
   try {
+    //* get the user login
+    const userId = req.session.userAuth;
+    //* find the user
+    const user = await User.findById(userId)
     res.json({
       status: "Success",
-      user: "User profile ",
+      data: user,
     });
   } catch (err) {
     res.json(err);

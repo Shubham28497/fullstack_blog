@@ -66,10 +66,15 @@ const logCtrl = async (req, res, next) => {
 };
 //*get user details
 const userDetailsCtrl = async (req, res) => {
+  // console.log(req.params);
   try {
+    //* get user id from params
+    const userId = req.params.id;
+    //*find user
+    const user = await User.findById(userId) 
     res.json({
       status: "Success",
-      user: "User detail ",
+      data: user,
     });
   } catch (err) {
     res.json(err);
@@ -81,7 +86,7 @@ const profileCtrl = async (req, res) => {
     //* get the user login
     const userId = req.session.userAuth;
     //* find the user
-    const user = await User.findById(userId)
+    const user = await User.findById(userId);
     res.json({
       status: "Success",
       data: user,

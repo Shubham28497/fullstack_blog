@@ -12,7 +12,7 @@ const regCtrl = async (req, res) => {
     }
     //!hashed password
     const salt = await bcrypt.genSalt(10);
-    const passHashed = await bcrypt.hash(password,salt)
+    const passHashed = await bcrypt.hash(password, salt);
     //!register user
     const user = await User.create({
       fullName,
@@ -29,10 +29,34 @@ const regCtrl = async (req, res) => {
 };
 //*login
 const logCtrl = async (req, res) => {
+  const { email, password } = req.body;
+
   try {
+    //!check if the email exists
+    const userFound = await User.findOne({ email });
+    if (!userFound) {
+      //! throw an error
+      if (userFound) {
+        res.json({
+          status: "failed",
+          message: "Invalid login credentails",
+        });
+      }
+    }
+    //! verify password
+    const isPassValid = await bcrypt.compare(password, userFound.password);
+    if (!isPassValid) {
+      //! throw an error
+      if (userFound) {
+        res.json({
+          status: "failed",
+          message: "Invalid password",
+        });
+      }
+    }
     res.json({
       status: "Success",
-      user: "User login ",
+      data: userFound,
     });
   } catch (err) {
     res.json(err);

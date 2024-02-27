@@ -5,6 +5,7 @@ const postRoutes = require("./routes/posts/Post");
 const commentRoutes = require("./routes/comments/Comment");
 const globalErrHandler = require("./middlewares/globalHandler");
 const session = require("express-session");
+const mongoStore = require("connect-mongo");
 const app = express();
 
 require("./config/dbConnect");
@@ -17,6 +18,10 @@ app.use(
     secret: process.env.SESSION_KEY,
     resave: false,
     saveUninitialized: true,
+    store: new mongoStore({
+      mongoUrl: process.env.MONGO_URL,
+      ttl: 24 * 60 * 60,
+    }),
   })
 );
 

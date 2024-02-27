@@ -123,23 +123,24 @@ const updatePassCtrl = async (req, res, next) => {
   const { password } = req.body;
   try {
     //* check if user is updating the password
-    const salt = await bcrypt.genSalt(10);
-    const passHashed = await bcrypt.hash(password, salt);
-
-    //* update user
-    await User.findByIdAndUpdate(
-      req.params.id,
-      {
-        password: passHashed,
-      },
-      {
-        new: true,
-      }
-    );
-    res.json({
-      status: "Success",
-      user: "Password has been changed ",
-    });
+    if (password) {
+      const salt = await bcrypt.genSalt(10);
+      const passHashed = await bcrypt.hash(password, salt);
+      //* update user
+      await User.findByIdAndUpdate(
+        req.params.id,
+        {
+          password: passHashed,
+        },
+        {
+          new: true,
+        }
+      );
+      res.json({
+        status: "Success",
+        user: "Password has been changed ",
+      });
+    }
   } catch (err) {
     return next(appErr("Please provide password field"));
   }

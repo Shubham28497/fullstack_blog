@@ -12,6 +12,10 @@ const {
 } = require("../../controllers/users/user");
 const userRoutes = express.Router();
 const protected = require("../../middlewares/protected");
+const multer = require("multer");
+const storage = require("../../config/cloudinary");
+//* instance of multer
+const upload = multer({ storage });
 //* register
 //!POST/register
 userRoutes.post("/register", regCtrl);
@@ -20,9 +24,19 @@ userRoutes.post("/login", logCtrl);
 //!GET/profile/:id
 userRoutes.get("/profile", protected, profileCtrl);
 //!PUT/profile-photo-upload/:id
-userRoutes.put("/profile-photo-upload/:id", profilePhotoUploadCtrl);
+userRoutes.put(
+  "/profile-photo-upload/",
+  protected,
+  upload.single("profile"),
+  profilePhotoUploadCtrl
+);
 //!PUT/cover-photo-upload/:id
-userRoutes.put("/cover-photo-upload/:id", coverPhotoUploadCtrl);
+userRoutes.put(
+  "/cover-photo-upload/",
+  protected,
+  upload.single("profile"),
+  coverPhotoUploadCtrl
+);
 //!PUT/update-password/:id
 userRoutes.put("/update-password/:id", updatePassCtrl);
 //!PUT/update/:id

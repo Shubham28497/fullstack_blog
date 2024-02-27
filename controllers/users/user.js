@@ -96,25 +96,60 @@ const profileCtrl = async (req, res) => {
   }
 };
 //*phtoupload
-const profilePhotoUploadCtrl = async (req, res) => {
+const profilePhotoUploadCtrl = async (req, res, next) => {
+  console.log(req.file.path);
   try {
+    //* find user to be uploaded
+    const userId = req.session.userAuth;
+    const userFound = await User.findById(userId);
+    //* check if user found
+    if (!userFound) {
+      return next(appErr("User not found", 403));
+    }
+    //* upload profile image
+    await User.findByIdAndUpdate(
+      userId,
+      {
+        profileImage: req.file.path,
+      },
+      {
+        new: true,
+      }
+    );
     res.json({
       status: "Success",
-      user: "User profile image upload ",
+      data: "You have successfully updated your profile photo ",
     });
   } catch (err) {
-    res.json(err);
+    next(appErr(err.message));
   }
 };
 //* cover photo upload
-const coverPhotoUploadCtrl = async (req, res) => {
+const coverPhotoUploadCtrl = async (req, res, next) => {
   try {
+    //* find user to be uploaded
+    const userId = req.session.userAuth;
+    const userFound = await User.findById(userId);
+    //* check if user found
+    if (!userFound) {
+      return next(appErr("User not found", 403));
+    }
+    //* upload profile image
+    await User.findByIdAndUpdate(
+      userId,
+      {
+        coverImage: req.file.path,
+      },
+      {
+        new: true,
+      }
+    );
     res.json({
       status: "Success",
-      user: "User cover image upload ",
+      data: "You have successfully updated your profile photo ",
     });
   } catch (err) {
-    res.json(err);
+    next(appErr(err.message));
   }
 };
 //*update pass

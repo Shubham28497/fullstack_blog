@@ -119,18 +119,33 @@ const coverPhotoUploadCtrl = async (req, res) => {
 };
 //*update pass
 
-const updatePassCtrl = async (req, res) => {
+const updatePassCtrl = async (req, res, next) => {
+  const { password } = req.body;
   try {
+    //* check if user is updating the password
+    const salt = await bcrypt.genSalt(10);
+    const passHashed = await bcrypt.hash(password, salt);
+
+    //* update user
+    await User.findByIdAndUpdate(
+      req.params.id,
+      {
+        password: passHashed,
+      },
+      {
+        new: true,
+      }
+    );
     res.json({
       status: "Success",
-      user: "User update password ",
+      user: "Password has been changed ",
     });
   } catch (err) {
-    res.json(err);
+    return next(appErr("Please provide password field"));
   }
 };
 //*update user
-const updateUserCtrl = async (req, res) => {
+const updateUserCtrl = async (req, res, next) => {
   const { fullName, email } = req.body;
   try {
     //*check if email is not taken
@@ -156,7 +171,7 @@ const updateUserCtrl = async (req, res) => {
       data: user,
     });
   } catch (err) {
-    return next(appErr(err.message))
+    return next(appErr(err.message));
   }
 };
 

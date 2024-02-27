@@ -11,16 +11,14 @@ const {
   logoutCtrl,
 } = require("../../controllers/users/user");
 const userRoutes = express.Router();
-const protected= require('../../middlewares/protected')
+const protected = require("../../middlewares/protected");
 //* register
 //!POST/register
 userRoutes.post("/register", regCtrl);
 //!POST/login
 userRoutes.post("/login", logCtrl);
-//!GET/:id
-userRoutes.get("/:id", userDetailsCtrl);
 //!GET/profile/:id
-userRoutes.get("/profile/:id", protected, profileCtrl);
+userRoutes.get("/profile", protected, profileCtrl);
 //!PUT/profile-photo-upload/:id
 userRoutes.put("/profile-photo-upload/:id", profilePhotoUploadCtrl);
 //!PUT/cover-photo-upload/:id
@@ -29,6 +27,8 @@ userRoutes.put("/cover-photo-upload/:id", coverPhotoUploadCtrl);
 userRoutes.put("/update-password/:id", updatePassCtrl);
 //!PUT/update/:id
 userRoutes.put("/update/:id", updateUserCtrl);
+//!GET/:id
+userRoutes.get("/:id", userDetailsCtrl);
 //!GET/logout/:id
 userRoutes.get("/logout", logoutCtrl);
 

@@ -71,7 +71,7 @@ const userDetailsCtrl = async (req, res) => {
     //* get user id from params
     const userId = req.params.id;
     //*find user
-    const user = await User.findById(userId) 
+    const user = await User.findById(userId);
     res.json({
       status: "Success",
       data: user,
@@ -131,13 +131,32 @@ const updatePassCtrl = async (req, res) => {
 };
 //*update user
 const updateUserCtrl = async (req, res) => {
+  const { fullName, email } = req.body;
   try {
+    //*check if email is not taken
+    if (email) {
+      const emailTaken = await User.findOne({ email });
+      if (emailTaken) {
+        return next(appErr("Email is taken", 400));
+      }
+    }
+    //* update the user
+    const user = await User.findByIdAndUpdate(
+      req.params.id,
+      {
+        fullName,
+        email,
+      },
+      {
+        new: true,
+      }
+    );
     res.json({
       status: "Success",
-      user: "User update  ",
+      data: user,
     });
   } catch (err) {
-    res.json(err);
+    return next(appErr(err.message))
   }
 };
 

@@ -3,7 +3,7 @@ const User = require("../../model/user/User");
 const appErr = require("../../utils/appErr");
 
 //* post created
-const postCreatedCtrl = async (req, res,next) => {
+const postCreatedCtrl = async (req, res, next) => {
   const { title, description, category, image, user } = req.body;
   try {
     if (!title || !description || !category || !req.file) {
@@ -31,29 +31,34 @@ const postCreatedCtrl = async (req, res,next) => {
       data: postCreated,
     });
   } catch (err) {
-    res.json(err);
+    next(appErr(err.message));
   }
 };
 //*get all posts
-const getPostCtrl = async (req, res) => {
+const getPostCtrl = async (req, res, next) => {
   try {
+    const getPosts = await Post.find();
     res.json({
       status: "Success",
-      user: "Posts list",
+      data: getPosts,
     });
   } catch (err) {
-    res.json(err);
+    next(appErr(err.message));
   }
 };
 //*post details
-const postDetailsCtrl = async (req, res) => {
+const postDetailsCtrl = async (req, res, next) => {
   try {
+    //* get the id from params
+    const id = req.params.id;
+    //* find the post
+    const userFound = await Post.findById(id);
     res.json({
       status: "Success",
-      user: "Posts details",
+      data: userFound,
     });
   } catch (err) {
-    res.json(err);
+    next(appErr(err.message));
   }
 };
 //*del post

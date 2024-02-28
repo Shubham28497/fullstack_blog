@@ -1,10 +1,14 @@
 const Post = require("../../model/post/Post");
 const User = require("../../model/user/User");
+const appErr = require("../../utils/appErr");
 
 //* post created
-const postCreatedCtrl = async (req, res) => {
+const postCreatedCtrl = async (req, res,next) => {
   const { title, description, category, image, user } = req.body;
   try {
+    if (!title || !description || !category || !req.file) {
+      return next(appErr("All fields are required"));
+    }
     //* find the user
     const userID = req.session.userAuth;
     // console.log(userID);
@@ -15,6 +19,7 @@ const postCreatedCtrl = async (req, res) => {
       description,
       category,
       user: userFound._id,
+      image: req.file.path,
     });
 
     //* push the post created into the arrayof user's post

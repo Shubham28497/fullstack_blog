@@ -7,9 +7,13 @@ const {
   updatePostCtrl,
 } = require("../../controllers/posts/post");
 const protected = require("../../middlewares/protected");
+const multer = require("multer");
+const storage = require("../../config/cloudinary");
 const postRoutes = express.Router();
+//* instance of multer
+const upload = multer({ storage });
 //!POST/api/v1/posts
-postRoutes.post("/", protected, postCreatedCtrl);
+postRoutes.post("/", protected, upload.single("file"), postCreatedCtrl);
 //!GET/api/v1/posts
 postRoutes.get("/", getPostCtrl);
 //!GET/api/v1/posts/:id

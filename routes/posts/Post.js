@@ -6,9 +6,10 @@ const {
   delPostCtrl,
   updatePostCtrl,
 } = require("../../controllers/posts/post");
+const protected = require("../../middlewares/protected");
 const postRoutes = express.Router();
 //!POST/api/v1/posts
-postRoutes.post("/", postCreatedCtrl);
+postRoutes.post("/", protected, postCreatedCtrl);
 //!GET/api/v1/posts
 postRoutes.get("/", getPostCtrl);
 //!GET/api/v1/posts/:id

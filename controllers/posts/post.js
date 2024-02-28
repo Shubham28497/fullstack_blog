@@ -62,14 +62,16 @@ const postDetailsCtrl = async (req, res, next) => {
   }
 };
 //*del post
-const delPostCtrl = async (req, res) => {
+const delPostCtrl = async (req, res,next) => {
   try {
+    //* del a post
+    await Post.findByIdAndDelete(req.params.id)
     res.json({
       status: "Success",
-      user: "Post delete",
+      data: "Post has been deleted succesfully",
     });
   } catch (err) {
-    res.json(err);
+    next(appErr(err.message))
   }
 };
 //*update post details

@@ -62,16 +62,22 @@ const postDetailsCtrl = async (req, res, next) => {
   }
 };
 //*del post
-const delPostCtrl = async (req, res,next) => {
+const delPostCtrl = async (req, res, next) => {
   try {
+    //* find a post
+    const post = await Post.findById(req.params.id);
+    //*check if the post belong to the user
+    if (post.user.toString() !== req.session.userAuth.toString()) {
+      return next(appErr("You are not allowed to delete this post", 403));
+    }
     //* del a post
-    await Post.findByIdAndDelete(req.params.id)
+    await Post.findByIdAndDelete(req.params.id);
     res.json({
       status: "Success",
       data: "Post has been deleted succesfully",
     });
   } catch (err) {
-    next(appErr(err.message))
+    next(appErr(err.message));
   }
 };
 //*update post details

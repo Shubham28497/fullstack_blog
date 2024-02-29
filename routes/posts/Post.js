@@ -19,8 +19,8 @@ postRoutes.get("/", getPostCtrl);
 //!GET/api/v1/posts/:id
 postRoutes.get("/:id", postDetailsCtrl);
 //!DEl/api/v1/posts/:id
-postRoutes.delete("/:id",protected, delPostCtrl);
+postRoutes.delete("/:id", protected, delPostCtrl);
 //!PUT/api/v1/posts/:id
-postRoutes.put("/:id", updatePostCtrl);
+postRoutes.put("/:id", protected, upload.single("file"), updatePostCtrl);
 
 module.exports = postRoutes;

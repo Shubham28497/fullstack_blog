@@ -6,9 +6,9 @@ const {
   upComCtrl,
 } = require("../../controllers/comments/comment");
 const commentRoutes = express.Router();
-
+const protected = require("../../middlewares/protected");
 //!POST/api/v1/comments
-commentRoutes.post("/", comCreatedCtrl);
+commentRoutes.post("/:id", protected, comCreatedCtrl);
 
 //!GET/api/v1/comments/:id
 commentRoutes.get("/:id", getComCtrl);

@@ -82,10 +82,25 @@ const delPostCtrl = async (req, res, next) => {
 };
 //*update post details
 const updatePostCtrl = async (req, res) => {
+  const { title, description, category } = req.body;
+  if (!title || !description || !category || !req.file)
+    return next(appErr("All fields are required"));
   try {
+    //* find a post
+    const post = await Post.findById(req.params.id);
+    //*check if the post belong to the user
+    if (post.user.toString() !== req.session.userAuth.toString()) {
+      return next(appErr("You are not allowed to delete this post", 403));
+    }
+    const postUpdated = await Post.findByIdAndUpdate(req.params.id, {
+      title,
+      description,
+      category,
+      image: req.file.path,
+    });
     res.json({
       status: "Success",
-      user: "Post updated",
+      data: postUpdated,
     });
   } catch (err) {
     res.json(err);

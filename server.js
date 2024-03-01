@@ -11,7 +11,10 @@ const app = express();
 require("./config/dbConnect");
 //*middleware
 app.use(express.json());
-
+//* configure ejs
+app.set("view engine", "ejs");
+//* server static files
+app.use(express.static(__dirname, +"/public"));
 //*session config
 app.use(
   session({

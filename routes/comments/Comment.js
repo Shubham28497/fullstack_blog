@@ -15,6 +15,6 @@ commentRoutes.get("/:id", getComCtrl);
 //!DEl/api/v1/comments/:id
 commentRoutes.delete("/:id", protected, delComCtrl);
 //!PUT/api/v1/comments/:id
-commentRoutes.put("/:id", upComCtrl);
+commentRoutes.put("/:id", protected,upComCtrl);
 
 module.exports = commentRoutes;

@@ -45,9 +45,17 @@ const getComCtrl = async (req, res) => {
 //*del comment
 const delComCtrl = async (req, res) => {
   try {
+    //* find a post
+    const comment = await Comment.findById(req.params.id);
+    //*check if the post belong to the user
+    if (comment.user.toString() !== req.session.userAuth.toString()) {
+      return next(appErr("You are not allowed to delete this comment", 403));
+    }
+    //* del a post
+    await Comment.findByIdAndDelete(req.params.id);
     res.json({
       status: "Success",
-      user: "Comment delete",
+      data: "Comment has been deleted succesfully",
     });
   } catch (err) {
     res.json(err);

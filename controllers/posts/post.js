@@ -90,7 +90,7 @@ const updatePostCtrl = async (req, res) => {
     const post = await Post.findById(req.params.id);
     //*check if the post belong to the user
     if (post.user.toString() !== req.session.userAuth.toString()) {
-      return next(appErr("You are not allowed to delete this post", 403));
+      return next(appErr("You are not allowed to update this post", 403));
     }
     const postUpdated = await Post.findByIdAndUpdate(req.params.id, {
       title,

@@ -13,7 +13,7 @@ commentRoutes.post("/:id", protected, comCreatedCtrl);
 //!GET/api/v1/comments/:id
 commentRoutes.get("/:id", getComCtrl);
 //!DEl/api/v1/comments/:id
-commentRoutes.delete("/:id", delComCtrl);
+commentRoutes.delete("/:id", protected, delComCtrl);
 //!PUT/api/v1/comments/:id
 commentRoutes.put("/:id", upComCtrl);
 

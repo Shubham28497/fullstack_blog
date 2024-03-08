@@ -21,6 +21,9 @@ const upload = multer({ storage });
 userRoutes.get("/login", (req, res) => {
   res.render("users/login");
 });
+userRoutes.get("/register", (req, res) => {
+  res.render("users/register");
+});
 //* register
 //!POST/register
 userRoutes.post("/register", regCtrl);

@@ -16,6 +16,11 @@ const multer = require("multer");
 const storage = require("../../config/cloudinary");
 //* instance of multer
 const upload = multer({ storage });
+
+//* rendering form
+userRoutes.get("/login", (req, res) => {
+  res.render("users/login");
+});
 //* register
 //!POST/register
 userRoutes.post("/register", regCtrl);

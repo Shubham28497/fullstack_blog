@@ -29,7 +29,7 @@ app.use(
 );
 //*render home
 app.get("/", (req, res) => {
-  res.render('index.ejs');
+  res.render("index");
 });
 //* user route
 app.use("/api/v1/users", userRoutes);

@@ -24,6 +24,9 @@ userRoutes.get("/login", (req, res) => {
 userRoutes.get("/register", (req, res) => {
   res.render("users/register");
 });
+userRoutes.get("/profile-page", (req, res) => {
+  res.render("users/profile");
+});
 //* register
 //!POST/register
 userRoutes.post("/register", regCtrl);

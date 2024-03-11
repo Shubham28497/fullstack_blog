@@ -27,6 +27,9 @@ userRoutes.get("/register", (req, res) => {
 userRoutes.get("/profile-page", (req, res) => {
   res.render("users/profile");
 });
+userRoutes.get("/upload-profile-photo", (req, res) => {
+  res.render("users/uploadProfilePhoto");
+});
 //* register
 //!POST/register
 userRoutes.post("/register", regCtrl);

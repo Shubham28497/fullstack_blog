@@ -14,29 +14,8 @@
 
 <body>
     <!-- nav -->
-    <nav>
-        <div>
-            <img src="../public/images/logo.png" alt="logo" />
-        </div>
-
-        <ul>
-            <li>
-                <a href="/login">Home</a>
-            </li>
-            <li>
-                <a href="#">Posts</a>
-            </li>
-            <li>
-                <a href="#">Login</a>
-            </li>
-            <li>
-                <a href="#">Register</a>
-            </li>
-            <li>
-                <a href="#" class="create-post-btn">New Post</a>
-            </li>
-        </ul>
-    </nav>
+  <%-include('../partials/navbar.ejs')%>
+   
     <div class="form-container">
         <!-- icon -->
         <h1>Login Into Your Account</h1>
@@ -60,6 +39,8 @@
             <p>Don't have an account? <a href="/register">Register</a></p>
         </form>
     </div>
+  <%-include('../partials/footer.ejs')%>
+
 </body>
 
 </html>

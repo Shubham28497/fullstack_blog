@@ -7,14 +7,18 @@ const regCtrl = async (req, res, next) => {
   const { fullName, email, password } = req.body;
   console.log("get req", req.body);
   if (!fullName || !email || !password) {
-    return next(appErr("All fields are required"));
+    // return next(appErr("All fields are required"));
+     return res.render("users/register", {
+       error: "All fields are required",
+     });
   }
   try {
     //!check if user exists
     const userFound = await User.findOne({ email });
     if (userFound) {
-      return next(appErr("User already exists"));
-      //return res.json({ status: "failed", data: "User already exists" });
+      return res.render("users/register", {
+        error: "Exist is taken",
+      });
     }
     //!hashed password
     const salt = await bcrypt.genSalt(10);
@@ -26,7 +30,7 @@ const regCtrl = async (req, res, next) => {
       password: passHashed,
     });
     //redirect after registration
-    res.redirect("/api/v1/users/profile-page")
+    res.redirect("/api/v1/users/profile-page");
   } catch (err) {
     res.json(err);
   }

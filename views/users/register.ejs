@@ -23,26 +23,28 @@
                 Register
                 <i class="fas fa-user-plus"></i>
             </h1>
-
+        <%if(error){%>
             <small class="error">
                 <i class="fas fa-exclamation-circle"></i>
-                Invalid Credentials
+                <%=error%>
             </small>
-            <form action="/api/v1/users/register" method="POST">
-                <!-- full name -->
-                <label for="name">Full Name</label>
-                <input type="text" name="fullName"/>
-                <!-- email -->
-                <label for="email">Email</label>
-                <input type="email" name="email"/>
+            <%}%>
 
-                <label for="password">Password</label>
-                <input type="password" name="password"/>
+                    <form action="/api/v1/users/register" method="POST">
+                        <!-- full name -->
+                        <label for="name">Full Name</label>
+                        <input type="text" name="fullName" />
+                        <!-- email -->
+                        <label for="email">Email</label>
+                        <input type="email" name="email" />
 
-                <button type="submit">Register</button>
+                        <label for="password">Password</label>
+                        <input type="password" name="password" />
 
-                <p>Already have an account? <a href="/register">Login</a></p>
-            </form>
+                        <button type="submit">Register</button>
+
+                        <p>Already have an account? <a href="/register">Login</a></p>
+                    </form>
         </div>
         <%-include('../partials/footer.ejs')%>
 

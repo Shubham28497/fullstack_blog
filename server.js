@@ -11,6 +11,7 @@ const app = express();
 require("./config/dbConnect");
 //*middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 //* configure ejs
 app.set("view engine", "ejs");
 //* server static files

@@ -5,7 +5,7 @@ const appErr = require("../../utils/appErr");
 //* register
 const regCtrl = async (req, res, next) => {
   const { fullName, email, password } = req.body;
-  console.log("get req",req.body)
+  console.log("get req", req.body);
   if (!fullName || !email || !password) {
     return next(appErr("All fields are required"));
   }
@@ -25,11 +25,8 @@ const regCtrl = async (req, res, next) => {
       email,
       password: passHashed,
     });
-    console.log("user",user)
-    res.json({
-      status: "Success",
-      data: user,
-    });
+    //redirect after registration
+    res.redirect("/api/v1/users/profile-page")
   } catch (err) {
     res.json(err);
   }

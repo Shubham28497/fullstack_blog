@@ -28,6 +28,15 @@ app.use(
     }),
   })
 );
+//* save the login user into locals
+app.use((req, res, next) => {
+  if (req.session.userAuth) {
+    res.locals.userAuth = req.session.userAuth;
+  } else {
+    res.locals.userAuth = null;
+  }
+  next()
+});
 //*render home
 app.get("/", (req, res) => {
   res.render("index");

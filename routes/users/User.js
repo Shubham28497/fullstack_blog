@@ -19,7 +19,9 @@ const upload = multer({ storage });
 
 //* rendering form
 userRoutes.get("/login", (req, res) => {
-  res.render("users/login");
+  res.render("users/login", {
+    error: "",
+  });
 });
 userRoutes.get("/register", (req, res) => {
   res.render("users/register", {

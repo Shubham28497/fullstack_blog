@@ -66,9 +66,10 @@ userRoutes.put(
 userRoutes.put("/update-password/:id", updatePassCtrl);
 //!PUT/update/:id
 userRoutes.put("/update/:id", updateUserCtrl);
-//!GET/:id
-userRoutes.get("/:id", userDetailsCtrl);
 //!GET/logout/:id
 userRoutes.get("/logout", logoutCtrl);
+//!GET/:id
+userRoutes.get("/:id", userDetailsCtrl);
+
 
 module.exports = userRoutes;

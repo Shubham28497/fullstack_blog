@@ -8,9 +8,9 @@ const regCtrl = async (req, res, next) => {
   console.log("get req", req.body);
   if (!fullName || !email || !password) {
     // return next(appErr("All fields are required"));
-     return res.render("users/register", {
-       error: "All fields are required",
-     });
+    return res.render("users/register", {
+      error: "All fields are required",
+    });
   }
   try {
     //!check if user exists
@@ -40,7 +40,10 @@ const logCtrl = async (req, res, next) => {
   // console.log(req.session)
   const { email, password } = req.body;
   if (!email || !password) {
-    return next(appErr("All fields are required"));
+    // return next(appErr("All fields are required"));
+    return res.render("users/login", {
+      error: "All fields are required",
+    });
   }
 
   try {
@@ -48,18 +51,24 @@ const logCtrl = async (req, res, next) => {
     const userFound = await User.findOne({ email });
     if (!userFound) {
       //! throw an error
-      return next(appErr("Invalid credentails"));
+    //  return next(appErr("Invalid credentails"));
+       return res.render("users/login", {
+         error: "Invalid credentails",
+       });
     }
     //! verify password
     const isPassValid = await bcrypt.compare(password, userFound.password);
     if (!isPassValid) {
       //! throw an error
-      return next(appErr("Invalid credentails"));
+      //return next(appErr("Invalid credentails"));
+       return res.render("users/login", {
+         error: "Invalid credentails",
+       });
     }
     //! save the user info
     req.session.userAuth = userFound._id;
     console.log(req.session);
-   res.redirect("/api/v1/users/profile-page");
+    res.redirect("/api/v1/users/profile-page");
   } catch (err) {
     res.json(err);
   }

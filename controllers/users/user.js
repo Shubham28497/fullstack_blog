@@ -224,14 +224,10 @@ const updateUserCtrl = async (req, res, next) => {
 
 //*logout
 const logoutCtrl = async (req, res) => {
-  try {
-    res.json({
-      status: "Success",
-      user: "User logout ",
-    });
-  } catch (err) {
-    res.json(err);
-  }
+  //* destroy sesson
+  req.session.destroy(()=>{
+    res.redirect("/api/v1/users/login")
+  })
 };
 module.exports = {
   regCtrl,

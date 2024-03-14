@@ -98,10 +98,7 @@ const profileCtrl = async (req, res) => {
     const user = await User.findById(userId)
       .populate("posts")
       .populate("comments");
-    res.json({
-      status: "Success",
-      data: user,
-    });
+   res.render("users/profile",{user})
   } catch (err) {
     res.json(err);
   }

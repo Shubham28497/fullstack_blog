@@ -5,6 +5,7 @@ const postRoutes = require("./routes/posts/Post");
 const commentRoutes = require("./routes/comments/Comment");
 const globalErrHandler = require("./middlewares/globalHandler");
 const session = require("express-session");
+const methodOverride=require("method-override")
 const mongoStore = require("connect-mongo");
 const app = express();
 
@@ -12,6 +13,7 @@ require("./config/dbConnect");
 //*middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride("_method"))
 //* configure ejs
 app.set("view engine", "ejs");
 //* server static files

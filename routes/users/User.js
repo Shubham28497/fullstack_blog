@@ -33,13 +33,13 @@ userRoutes.get("/register", (req, res) => {
 //   res.render("users/profile");
 // });
 userRoutes.get("/upload-profile-photo", (req, res) => {
-  res.render("users/uploadProfilePhoto");
+  res.render("users/uploadProfilePhoto",{error:""});
 });
 userRoutes.get("/upload-cover-photo", (req, res) => {
-  res.render("users/uploadCoverPhoto");
+  res.render("users/uploadCoverPhoto", { error: "" });
 });
 userRoutes.get("/update-user", (req, res) => {
-  res.render("users/updateUser");
+  res.render("users/updateUser", { error: "" });
 });
 //* register
 //!POST/register

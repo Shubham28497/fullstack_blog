@@ -29,9 +29,9 @@ userRoutes.get("/register", (req, res) => {
   });
 });
 
-userRoutes.get("/profile-page", (req, res) => {
-  res.render("users/profile");
-});
+// userRoutes.get("/profile-page", (req, res) => {
+//   res.render("users/profile");
+// });
 userRoutes.get("/upload-profile-photo", (req, res) => {
   res.render("users/uploadProfilePhoto");
 });
@@ -47,7 +47,7 @@ userRoutes.post("/register", regCtrl);
 //!POST/login
 userRoutes.post("/login", logCtrl);
 //!GET/profile/:id
-userRoutes.get("/profile", protected, profileCtrl);
+userRoutes.get("/profile-page", protected, profileCtrl);
 //!PUT/profile-photo-upload/:id
 userRoutes.put(
   "/profile-photo-upload/",

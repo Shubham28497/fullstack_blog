@@ -107,12 +107,13 @@ const profileCtrl = async (req, res) => {
 const profilePhotoUploadCtrl = async (req, res, next) => {
   // console.log(req.file.path);
   //*check if file exists
-  if(!req.file){
-    return res.render("users/uploadProfilePhoto",{
-        error:"Please upload image"
-      })  
-  }
+  
   try {
+    if (!req.file) {
+      return res.render("users/uploadProfilePhoto", {
+        error: "Please upload image",
+      });
+    }
     //* find user to be uploaded
     const userId = req.session.userAuth;
     const userFound = await User.findById(userId);
@@ -120,7 +121,7 @@ const profilePhotoUploadCtrl = async (req, res, next) => {
     if (!userFound) {
       return res.render("users/uploadProfilePhoto", {
         error: "User not found",
-      });  
+      });
     }
     //* upload profile image
     await User.findByIdAndUpdate(
@@ -133,27 +134,33 @@ const profilePhotoUploadCtrl = async (req, res, next) => {
       }
     );
     //redirect
-      res.redirect("/api/v1/users/profile-page")
-    res.json({
-      status: "Success",
-      data: "You have successfully updated your profile photo ",
-    });
-  } catch (err) {
-    // next(appErr(err.message));
+    res.redirect("/api/v1/users/profile-page");
+    // res.json({
+    //   status: "Success",
+    //   data: "You have successfully updated your profile photo ",
+    // });
+  } catch (error) {
     return res.render("users/uploadProfilePhoto", {
-      error: err.message,
-    });  
+      error: error.message,
+    });
   }
 };
 //* cover photo upload
 const coverPhotoUploadCtrl = async (req, res, next) => {
   try {
+    if (!req.file) {
+      return res.render("users/uploadProfilePhoto", {
+        error: "Please upload image",
+      });
+    }
     //* find user to be uploaded
     const userId = req.session.userAuth;
     const userFound = await User.findById(userId);
     //* check if user found
     if (!userFound) {
-      return next(appErr("User not found", 403));
+      return res.render("users/uploadProfilePhoto", {
+        error: "User not found",
+      });
     }
     //* upload profile image
     await User.findByIdAndUpdate(
@@ -165,12 +172,16 @@ const coverPhotoUploadCtrl = async (req, res, next) => {
         new: true,
       }
     );
-    res.json({
-      status: "Success",
-      data: "You have successfully updated your profile photo ",
+    res.redirect("/api/v1/users/profile-page");
+
+    // res.json({
+    //   status: "Success",
+    //   data: "You have successfully updated your profile photo ",
+    // });
+  } catch (error) {
+    return res.render("users/uploadProfilePhoto", {
+      error: error.message,
     });
-  } catch (err) {
-    next(appErr(err.message));
   }
 };
 //*update pass

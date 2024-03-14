@@ -26,9 +26,11 @@
                 <i class="fas fa fa-exclamation-circle"></i>
                 Invalid Credentials
             </small>
-            <form action="/api/v1/users/upload-profile-photo" method="post">
+            <form action="/api/v1/users/profile-photo-upload?_method=PUT" method="post"
+            enctype="multipart/form-data"
+            >
                 <label for="email">Select Imgae</label>
-                <input type="file" name="image" id="image" />
+                <input type="file" name="profile"/>
                 <button type="submit">
                     <i class="fas fa fa-upload"></i>
                 </button>

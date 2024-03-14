@@ -105,14 +105,22 @@ const profileCtrl = async (req, res) => {
 };
 //*phtoupload
 const profilePhotoUploadCtrl = async (req, res, next) => {
-  console.log(req.file.path);
+  // console.log(req.file.path);
+  //*check if file exists
+  if(!req.file){
+    return res.render("users/profile",{
+        error:"Please upload image"
+      })  
+  }
   try {
     //* find user to be uploaded
     const userId = req.session.userAuth;
     const userFound = await User.findById(userId);
     //* check if user found
     if (!userFound) {
-      return next(appErr("User not found", 403));
+      return res.render("users/profile", {
+        error: "User not found",
+      });  
     }
     //* upload profile image
     await User.findByIdAndUpdate(
@@ -129,7 +137,10 @@ const profilePhotoUploadCtrl = async (req, res, next) => {
       data: "You have successfully updated your profile photo ",
     });
   } catch (err) {
-    next(appErr(err.message));
+    // next(appErr(err.message));
+    return res.render("users/profile", {
+      error: err.message,
+    });  
   }
 };
 //* cover photo upload

@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Fontawesome -->
-    <script src="https://kit.fontawesome.com/42a182743f.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://kit.fontawesome.com/42a182743f.js" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- CSS -->
     <link rel="stylesheet" href="/public/css/uploadPhoto.css" />
     <title>Upload Cover Photo</title>
@@ -22,14 +23,14 @@
             <!-- upload icon -->
         </p>
         <small class="error">
-            <i class="fas fa-exclamation-circle"></i>
+            <i class="fas fa fa-exclamation-circle"></i>
             Invalid Credentials
         </small>
         <form action="/login" method="POST">
             <label for="email">Select Imgae</label>
             <input type="file" name="image" id="image" />
             <button type="submit">
-                <i class="fas fa-upload"></i>
+                <i class="fas fa fa-upload"></i>
             </button>
         </form>
     </div>

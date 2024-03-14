@@ -22,10 +22,12 @@
             <p>
                 <!-- upload icon -->
             </p>
-            <small class="error">
-                <i class="fas fa fa-exclamation-circle"></i>
-                Invalid Credentials
-            </small>
+            <%if(error){%>
+                <small class="error">
+                    <i class="fas fa fa-exclamation-circle"></i>
+                    <%=error%>
+                </small>
+                <%}%>
             <form action="/api/v1/users/profile-photo-upload?_method=PUT" method="post"
             enctype="multipart/form-data"
             >

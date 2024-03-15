@@ -12,6 +12,10 @@ const storage = require("../../config/cloudinary");
 const postRoutes = express.Router();
 //* instance of multer
 const upload = multer({ storage });
+//* forms
+postRoutes.get("/get-post-form",(req,res)=>{
+  res.render("posts/addPost",{error:""})
+})
 //!POST/api/v1/posts
 postRoutes.post("/", protected, upload.single("file"), postCreatedCtrl);
 //!GET/api/v1/posts

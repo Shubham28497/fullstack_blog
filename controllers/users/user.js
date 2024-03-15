@@ -88,7 +88,10 @@ const userDetailsCtrl = async (req, res) => {
       
     })
   } catch (error) {
-    res.json(error);
+     res.render("users/updateUser", {
+       error: error.message
+       
+     });
   }
 };
 //*profile

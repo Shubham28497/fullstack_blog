@@ -65,7 +65,7 @@ userRoutes.put(
 //!PUT/update-password/:id
 userRoutes.put("/update-password/:id", updatePassCtrl);
 //!PUT/update/:id
-userRoutes.put("/update/:id", updateUserCtrl);
+userRoutes.put("/update", updateUserCtrl);
 //!GET/logout/:id
 userRoutes.get("/logout", logoutCtrl);
 //!GET/:id

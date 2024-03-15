@@ -30,17 +30,13 @@
         <form action="/login" method="POST">
             <!-- full name -->
             <label for="name">Full Name</label>
-            <input type="text" name="name" id="name" />
+            <input type="text" value="<%=user.fullName%>" name="name" id="name" />
             <!-- email -->
             <label for="email">Email</label>
-            <input type="email" name="email" id="email" />
+            <input type="email" value="<%=user.email%>" name="email" id="email"/>
 
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password" />
+            <button type="submit">Update User</button>
 
-            <button type="submit">Register</button>
-
-            <p>Already have an account? <a href="/register">Login</a></p>
         </form>
     </div>
         <%-include('../partials/footer.ejs')%>

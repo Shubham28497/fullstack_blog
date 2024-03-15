@@ -31,8 +31,8 @@ const regCtrl = async (req, res, next) => {
     });
     //redirect after registration
     res.redirect("/api/v1/users/profile-page");
-  } catch (err) {
-    res.json(err);
+  } catch (error) {
+    res.json(error);
   }
 };
 //*login
@@ -69,8 +69,8 @@ const logCtrl = async (req, res, next) => {
     req.session.userAuth = userFound._id;
     console.log(req.session);
     res.redirect("/api/v1/users/profile-page");
-  } catch (err) {
-    res.json(err);
+  } catch (error) {
+    res.json(error);
   }
 };
 //*get user details
@@ -83,10 +83,12 @@ const userDetailsCtrl = async (req, res) => {
     const user = await User.findById(userId);
     
     res.render("users/updateUser",{
-      user
+      error:"",
+      user,
+      
     })
-  } catch (err) {
-    res.json(err);
+  } catch (error) {
+    res.json(error);
   }
 };
 //*profile
@@ -99,8 +101,8 @@ const profileCtrl = async (req, res) => {
       .populate("posts")
       .populate("comments");
    res.render("users/profile",{user})
-  } catch (err) {
-    res.json(err);
+  } catch (error) {
+    res.json(error);
   }
 };
 //*phtoupload
@@ -216,16 +218,25 @@ const updatePassCtrl = async (req, res, next) => {
 const updateUserCtrl = async (req, res, next) => {
   const { fullName, email } = req.body;
   try {
+    if(!fullName || !email){
+      return res.render("users/updateUser", {
+        error: "Please provide the details",
+        user: "",
+      });
+    }
     //*check if email is not taken
     if (email) {
       const emailTaken = await User.findOne({ email });
       if (emailTaken) {
-        return next(appErr("Email is taken", 400));
+       return res.render("users/updateUser", {
+         error: "Email is taken",
+         user:"",
+       });
       }
     }
     //* update the user
-    const user = await User.findByIdAndUpdate(
-      req.params.id,
+     await User.findByIdAndUpdate(
+      req.session.userAuth,
       {
         fullName,
         email,
@@ -234,12 +245,12 @@ const updateUserCtrl = async (req, res, next) => {
         new: true,
       }
     );
-    res.json({
-      status: "Success",
-      data: user,
+    res.redirect("/api/v1/users/profile-page");
+  } catch (error) {
+    return res.render("users/updateUser", {
+      error: error.message,
+      user:""
     });
-  } catch (err) {
-    return next(appErr(err.message));
   }
 };
 

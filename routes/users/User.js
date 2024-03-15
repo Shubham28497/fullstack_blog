@@ -63,7 +63,7 @@ userRoutes.put(
   coverPhotoUploadCtrl
 );
 //!PUT/update-password/:id
-userRoutes.put("/update-password/:id", updatePassCtrl);
+userRoutes.put("/update-password", updatePassCtrl);
 //!PUT/update/:id
 userRoutes.put("/update", updateUserCtrl);
 //!GET/logout/:id

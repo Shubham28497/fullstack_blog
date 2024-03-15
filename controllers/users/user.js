@@ -85,6 +85,9 @@ const userDetailsCtrl = async (req, res) => {
       status: "Success",
       data: user,
     });
+    res.render("users/updateUser",{
+      user
+    })
   } catch (err) {
     res.json(err);
   }

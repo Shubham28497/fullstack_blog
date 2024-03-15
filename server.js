@@ -39,9 +39,14 @@ app.use((req, res, next) => {
   }
   next()
 });
-//*render home
-app.get("/", (req, res) => {
-  res.render("index");
+//render home
+app.get("/", async (req, res) => {
+  try {
+    const posts = await Post.find();
+    res.render("index", { posts });
+  } catch (error) {
+    res.render("index", { error: error.message });
+  }
 });
 //* user route
 app.use("/api/v1/users", userRoutes);

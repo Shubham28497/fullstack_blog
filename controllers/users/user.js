@@ -205,13 +205,18 @@ const updatePassCtrl = async (req, res, next) => {
           new: true,
         }
       );
-      res.json({
-        status: "Success",
-        user: "Password has been changed ",
-      });
+      // res.json({
+      //   status: "Success",
+      //   user: "Password has been changed ",
+      // });
+    res.redirect("/api/v1/users/profile-page");
+
     }
-  } catch (err) {
-    return next(appErr("Please provide password field"));
+  } catch (error) {
+    return res.render("users/updateUser", {
+      error: error.message,
+      user: "",
+    });
   }
 };
 //*update user

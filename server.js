@@ -8,7 +8,7 @@ const session = require("express-session");
 const methodOverride=require("method-override")
 const mongoStore = require("connect-mongo");
 const app = express();
-
+const Post = require("./model/post/Post");
 require("./config/dbConnect");
 //*middleware
 app.use(express.json());

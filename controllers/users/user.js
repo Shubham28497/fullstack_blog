@@ -197,7 +197,7 @@ const updatePassCtrl = async (req, res, next) => {
       const passHashed = await bcrypt.hash(password, salt);
       //* update user
       await User.findByIdAndUpdate(
-        req.params.id,
+        req.session.userAuth,
         {
           password: passHashed,
         },

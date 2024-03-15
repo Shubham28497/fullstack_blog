@@ -81,10 +81,7 @@ const userDetailsCtrl = async (req, res) => {
     const userId = req.params.id;
     //*find user
     const user = await User.findById(userId);
-    res.json({
-      status: "Success",
-      data: user,
-    });
+    
     res.render("users/updateUser",{
       user
     })

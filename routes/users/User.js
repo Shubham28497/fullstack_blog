@@ -38,9 +38,10 @@ userRoutes.get("/upload-profile-photo", (req, res) => {
 userRoutes.get("/upload-cover-photo", (req, res) => {
   res.render("users/uploadCoverPhoto", { error: "" });
 });
-// userRoutes.get("/update-user", (req, res) => {
-//   res.render("users/updateUser", { error: "" });
-// });
+//*update user pass
+userRoutes.get("/update-user-password", (req, res) => {
+  res.render("users/updatePassword", { error: "" });
+});
 //* register
 //!POST/register
 userRoutes.post("/register", regCtrl);

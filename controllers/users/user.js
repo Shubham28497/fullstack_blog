@@ -82,11 +82,10 @@ const userDetailsCtrl = async (req, res) => {
     //*find user
     const user = await User.findById(userId);
     
-    res.render("users/updateUser",{
-      error:"",
+    res.render("users/updateUser", {
       user,
-      
-    })
+      error: "",
+    });
   } catch (error) {
      res.render("users/updateUser", {
        error: error.message

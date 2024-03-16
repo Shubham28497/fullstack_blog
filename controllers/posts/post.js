@@ -37,10 +37,10 @@ const postCreatedCtrl = async (req, res, next) => {
 //*get all posts
 const getPostCtrl = async (req, res, next) => {
   try {
-    const getPosts = await Post.find().populate("comments").populate("user");
+    const posts = await Post.find().populate("comments").populate("user");
     res.json({
       status: "Success",
-      data: getPosts,
+      data: posts,
     });
   } catch (err) {
     next(appErr(err.message));

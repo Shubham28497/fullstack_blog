@@ -54,12 +54,12 @@
         <%}else{%>
           <%posts?.forEach((post)=>{%>
             <article class="post-content">
-              <img src="<%post?.image%> " alt="" class="post-image" />
+              <img src="<%=post?.image%>" alt="" class="post-image" />
               <p class="post-info">
                 <span class="post-author">
                   <i class="fas fa-user"></i>
                   <a href="#">
-                    <%=post?.user?.fullname%>
+                    <%=post?.user?.fullName%>
                   </a>
                 </span>
                 <span class="post-date">

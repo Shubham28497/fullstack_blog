@@ -7,7 +7,10 @@ const postCreatedCtrl = async (req, res, next) => {
   const { title, description, category, image, user } = req.body;
   try {
     if (!title || !description || !category || !req.file) {
-      return next(appErr("All fields are required"));
+      // return next(appErr("All fields are required"));
+      return res.render("posts/addPost", {
+        error: "All fields are required",
+      });
     }
     //* find the user
     const userID = req.session.userAuth;
@@ -26,12 +29,15 @@ const postCreatedCtrl = async (req, res, next) => {
     userFound.posts.push(postCreated._id);
     //* re save
     await userFound.save();
-    res.json({
-      status: "Success",
-      data: postCreated,
-    });
+    res.redirect("/")
+    // res.json({
+    //   status: "Success",
+    //   data: postCreated,
+    // });
   } catch (err) {
-    next(appErr(err.message));
+    return res.render("posts/addPost", {
+      error: err.message,
+    });
   }
 };
 //*get all posts

@@ -19,9 +19,9 @@ postRoutes.get("/get-post-form",(req,res)=>{
 //!POST/api/v1/posts
 postRoutes.post("/", protected, upload.single("file"), postCreatedCtrl);
 //!GET/api/v1/posts
-postRoutes.get("/", getPostCtrl);
+postRoutes.get("/", getPostCtrl); //fetchposts
 //!GET/api/v1/posts/:id
-postRoutes.get("/:id", postDetailsCtrl);
+postRoutes.get("/:id", postDetailsCtrl); //fetch post
 //!DEl/api/v1/posts/:id
 postRoutes.delete("/:id", protected, delPostCtrl);
 //!PUT/api/v1/posts/:id

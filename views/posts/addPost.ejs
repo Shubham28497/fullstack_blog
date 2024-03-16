@@ -27,7 +27,7 @@
         <i class="fas fa-exclamation-circle"></i>
         Invalid Credentials
       </small>
-      <form action="/login" method="POST">
+      <form enctype="multipart/form-data" action="/api/v1/posts" method="POST">
         <!-- Post Title -->
         <div class="input-wrapper">
           <label for="name">Post Title</label>
@@ -58,7 +58,7 @@
         <!-- Post Image -->
         <div class="input-wrapper">
           <label for="image">Post Image</label>
-          <input type="file" name="image" id="image" />
+          <input type="file" name="file" id="image" />
           <!-- err -->
         </div>
 
